@@ -15,6 +15,8 @@ public class PlayerBehavior : MonoBehaviour
     public GameObject platform;
     public float bulletSpeed = 100f;
 
+    private Vector3 bulletOffSet;
+    private Transform position;
     private bool isJumping = false;
     private bool isShooting = false;
     private bool firePlatform = false;
@@ -29,6 +31,8 @@ public class PlayerBehavior : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
+        position = GameObject.Find("Player").transform;   
+
     }
 
     // Update is called once per frame
@@ -67,11 +71,12 @@ public class PlayerBehavior : MonoBehaviour
 
         if(isShooting)
         {
+            bulletOffSet = position.TransformPoint(1f, 0f, 0f);
             Vector3 source = mainCamera.transform.eulerAngles;
             Vector3 target = bullet.transform.eulerAngles;
             target.y = source.y;
             bullet.transform.eulerAngles = target;
-            GameObject newBullet = Instantiate(bullet, this.transform.position + new Vector3(1, 0, 0), bullet.transform.rotation) as GameObject;
+            GameObject newBullet = Instantiate(bullet, bulletOffSet, bullet.transform.rotation) as GameObject;
             Rigidbody bulletRB = newBullet.GetComponent<Rigidbody>();
             bulletRB.velocity = this.transform.forward* bulletSpeed;
             isShooting = false;
