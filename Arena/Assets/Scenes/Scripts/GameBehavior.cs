@@ -47,19 +47,17 @@ public class GameBehavior : MonoBehaviour
             _playerHP = value;
             Debug.LogFormat("Lives:{0}", _playerHP);
         
-        if (_playerHP <= 0)
-        {
-            labelText = "You want anothe rlife with that?";
-            showLossScreen = true;
-            Time.timeScale = 0;
-            
-        } else
-        {
-            labelText = "Ouch... that's got to hurt.";
+            if (_playerHP <= 0)
+            {
+                labelText = "You want anothe rlife with that?";
+                showLossScreen = true;
+                Time.timeScale = 0;
+                
+            } else
+            {
+                labelText = "Ouch... that's got to hurt.";
+            }
         }
-        }
-        
-
     }
 
 
