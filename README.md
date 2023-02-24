@@ -1,4 +1,4 @@
-# M1_DV02: Move
-In this assignment we created movement logic for the player and camera. We also gave the pickup features and created a enemy with the ability to detect the player.
+# M2_DV2: Method Madness
 
-Build Link:  https://dubbep.github.io/M2-DV1-Move/
+
+Build Link:  https://dubbep.github.io/M2-DV2-Method-Madness/
