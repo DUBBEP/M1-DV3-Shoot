@@ -6,10 +6,13 @@ public class PlatformBehavior : MonoBehaviour
 {
     public float platformSpeed = 3f;
     public float onscreenDelay = 20;
+    
+    private float platformAngle;
     // Start is called before the first frame update
     void Start()
     {
         Destroy(this.gameObject, onscreenDelay);
+        platformAngle = this.transform.eulerAngles.y;
     }
 
     // Update is called once per frame
@@ -17,4 +20,5 @@ public class PlatformBehavior : MonoBehaviour
     {
         this.transform.Translate(Vector3.forward * platformSpeed * Time.deltaTime);
     }
+
 }

@@ -24,7 +24,7 @@ public class PlayerBehavior : MonoBehaviour
 
     private Vector3 bulletOffSet;
     private Transform position;
-    private bool isGroundJumping = false;
+    public bool isGroundJumping = false;
     private bool isAirJumping = false;
     private bool isShooting = false;
     private bool firePlatform = false;
@@ -145,7 +145,7 @@ public class PlayerBehavior : MonoBehaviour
         #endregion 
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         Vector3 capsuleBottom = new Vector3(col.bounds.center.x, col.bounds.min.y, col.bounds.center.z);
         bool grounded = Physics.CheckCapsule(col.bounds.center, capsuleBottom, distanceToGround, groundLayer, QueryTriggerInteraction.Ignore);
