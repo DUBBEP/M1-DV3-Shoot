@@ -25,7 +25,6 @@ public class PlayerBehavior : MonoBehaviour
     private Vector3 bulletOffSet;
     private Transform position;
     public bool isGroundJumping = false;
-    private bool isAirJumping = false;
     private bool isShooting = false;
     private bool firePlatform = false;
     private float vInput;
@@ -35,6 +34,11 @@ public class PlayerBehavior : MonoBehaviour
     public float fallSpeed;
     private Rigidbody rb;
     private CapsuleCollider col;
+
+    public delegate void JumpingEvent();
+
+    public event JumpingEvent playerJump;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,11 +61,9 @@ public class PlayerBehavior : MonoBehaviour
         {
             isGroundJumping = true;
             lastJumpTime = bufferTime;
-        } else if (Input.GetButtonDown("Jump") && !IsGrounded() && gameManager.airJumpCount > 0)
-        {
-            isAirJumping = true;
-        }
 
+            playerJump();
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -85,31 +87,6 @@ public class PlayerBehavior : MonoBehaviour
             rb.AddForce(Vector3.up * jumpVelocity, ForceMode.Impulse);
         }
 
-        if (isAirJumping)
-        {
-            lastJumpTime = 0f;
-            isAirJumping = false;
-            gameManager.airJumpCount -= 1;
-            rb.velocity = new Vector3(0, 0, 0);
-            rb.AddForce(Vector3.up * airJumpVelocity, ForceMode.Impulse);
-        }
-
-        // if (rb.velocity.y <= 0 && !IsGrounded())
-        // {
-        //     fallSpeed = decendingForce;
-        // } else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
-        // {
-        //     if (lastJumpTime >= -5f)
-        //     {
-        //         fallSpeed = decendingForce * 2;
-        //     } else
-        //     {
-        //         fallSpeed = decendingForce;
-        //     }
-        // } else 
-        // {
-        //     fallSpeed = extraFallForce;
-        // }
 
         if (isShooting)
         {
